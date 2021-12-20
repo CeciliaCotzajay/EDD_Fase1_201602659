@@ -4,7 +4,7 @@ function inciarSesion(){
     var usuario=document.getElementById("username").value; 
     var password=document.getElementById("password").value; 
     if (usuario=="admin" && password=="1234") { 
-    window.location="admin.html"; 
+    window.location="admin_registro.html"; 
     } 
     else if (usuario=="USUARIO2" && password=="CONTRASEÑA2") { 
     window.location="TU_PAGINA_WEB.HTML"; 

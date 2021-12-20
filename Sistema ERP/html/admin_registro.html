@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+  <title>Sistema ERP</title>
+</head>
+
+<body style="background-image: url(../img/fg.png);" onload="recuperar_Estructuras()">
+  <ul class="nav nav-tabs" style="background-color: rgb(1, 1, 87);">
+    <li class="nav-item">
+      <a class="nav-link" href="Login.html"><img src="../img/logo.jpg" alt="" width="45" height="39"></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" aria-current="page" href="admin_registro.html">Registrar Usuarios</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="admin_carga-reporte.html">Carga y Reportes</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="Login.html">Salir</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link disabled">Administrador</a>
+    </li>
+  </ul>
+  <br><br>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <div id="registroProveedores" style="color: ghostwhite;">
+          <h1>Registro</h1>
+          <br>
+          <ul class="nav nav-tabs" id="myTab" role="tablist" style="background-color: rgb(1, 1, 87);">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+                role="tab" aria-controls="home" aria-selected="true">Proveedor</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+                role="tab" aria-controls="profile" aria-selected="false">Vendedor</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile2" type="button"
+                role="tab" aria-controls="profile" aria-selected="false">Cliente</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile3" type="button"
+                role="tab" aria-controls="profile" aria-selected="false">Evento</button>
+            </li>
+          </ul>
+          <br>
+          <div class="row">
+            <div class="col-md-9 offset-md-1">
+              <div class="tab-content" id="myTabContent">
+                <!--FORMULARIO PROVEEDOR-->
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                  <div class="row">
+                    <div class="col-md-8">
+                      <h3>Proveedor</h3>
+                      <form class="row g-3">
+                        <div class="col-md-6">
+                          <label for="inputEmail4" class="form-label">ID</label>
+                          <input type="text" class="form-control" id="idProveedor">
+                        </div>
+                        <div class="col-md-6">
+                          <label for="inputAddress" class="form-label">Nombre</label>
+                          <input type="text" class="form-control" id="nombreProveedor">
+                        </div>
+                        <div class="col-12">
+                          <label for="inputAddress" class="form-label">Dirección</label>
+                          <input type="text" class="form-control" id="direccionProveedor" placeholder="1234 Calle 9">
+                        </div>
+                        <div class="col-md-6">
+                          <label for="inputEmail4" class="form-label">Teléfono</label>
+                          <input type="text" class="form-control" id="telefonoProveedor">
+                        </div>
+                        <div class="col-md-6">
+                          <label for="inputEmail4" class="form-label">Correo</label>
+                          <input type="email" class="form-control" id="correoProveedor">
+                        </div>
+                        <div class="col-12">
+                          <button type="button" class="btn btn-primary" onclick="registrarProveedor()">Registrar</button>
+                          <button type="button" class="btn btn-primary" onclick="imprimir()">imprimir</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <!--FORMULARIO VENDEDOR-->
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                  <div class="row">
+                    <div class="col-md-8">
+                      <h3>Vendedor</h3>
+                      <form class="row g-3">
+                        <div class="col-md-6">
+                          <label for="inputEmail4" class="form-label">ID</label>
+                          <input type="text" class="form-control" id="idVendedor">
+                        </div>
+                        <div class="col-md-6">
+                          <label for="inputAddress" class="form-label">Nombre</label>
+                          <input type="text" class="form-control" id="nombreVendedor">
+                        </div>
+                        <div class="col-12">
+                          <label for="inputAddress" class="form-label">Correo</label>
+                          <input type="text" class="form-control" id="correoVendedor" placeholder="ejemplo@ejemplo.com">
+                        </div>
+                        <div class="col-md-6">
+                          <label for="inputEmail4" class="form-label">Edad</label>
+                          <input type="text" class="form-control" id="edadVendedor">
+                        </div>
+                        <div class="col-md-6">
+                          <label for="inputEmail4" class="form-label">Password</label>
+                          <input type="password" class="form-control" id="passwordVendedor" placeholder="Password">
+                        </div>
+                        <div class="col-12">
+                          <button type="button" class="btn btn-primary" onclick="registrarVendedor()">Registrar</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <!--FORMULARIO CLIENTE-->
+                <div class="tab-pane fade" id="profile2" role="tabpanel" aria-labelledby="profile-tab">
+                  <div class="row">
+                    <div class="col-md-8">
+                      <h3>Cliente</h3>
+                      <form class="row g-3">
+                        <div class="col-md-6">
+                          <label for="inputEmail4" class="form-label">ID</label>
+                          <input type="text" class="form-control" id="idCliente">
+                        </div>
+                        <div class="col-md-6">
+                          <label for="inputAddress" class="form-label">Nombre</label>
+                          <input type="text" class="form-control" id="nombreCliente">
+                        </div>
+                        <div class="col-12">
+                          <label for="inputAddress" class="form-label">Correo</label>
+                          <input type="text" class="form-control" id="correoCliente" placeholder="ejemplo@ejemplo.com">
+                        </div>
+                        <div class="col-md-6">
+                          <label for="inputEmail4" class="form-label">ID Vendedor</label>
+                          <input type="text" class="form-control" id="idVendedorCliente">
+                        </div>
+                        <div class="col-12">
+                          <button type="button" class="btn btn-primary" onclick="registrarCliente()">Registrar</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <!--FORMULARIO EVENTO-->
+                <div class="tab-pane fade" id="profile3" role="tabpanel" aria-labelledby="profile-tab">
+                  <div class="row">
+                    <div class="col-md-8">
+                      <h3>Evento</h3>
+                      <form class="row g-3">
+                        <div class="col-md-6">
+                          <label for="inputEmail4" class="form-label">Mes</label>
+                          <input type="text" class="form-control" id="mesEvento">
+                        </div>
+                        <div class="col-md-6">
+                          <label for="inputAddress" class="form-label">Día</label>
+                          <input type="text" class="form-control" id="diaEvento">
+                        </div>
+                        <div class="col-md-6">
+                          <label for="inputEmail4" class="form-label">Hora</label>
+                          <input type="text" class="form-control" id="horaEvento">
+                        </div>
+                        <div class="col-md-6">
+                          <label for="inputAddress" class="form-label">ID Vendedor</label>
+                          <input type="text" class="form-control" id="idVendedorEvento">
+                        </div>
+                        <div class="col-12">
+                          <label for="inputAddress" class="form-label">Descripcion</label>
+                          <input type="text" class="form-control" id="descripcionEvento" placeholder="Descripción Evento">
+                        </div>
+                        <div class="col-12">
+                          <button type="button" class="btn btn-primary" onclick="registrarEvento()">Registrar</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+
+  <div class="container">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+      <div class="col-md-4 d-flex align-items-center">
+        <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+          <svg class="bi" width="30" height="24">
+            <use xlink:href="https://getbootstrap.com/" />
+          </svg>
+        </a>
+        <span class="text-muted">&copy; 2021 USAC, Ingeniería en Ciencias y Sistemas, EDD, Cecilia Cotzajay.</span>
+      </div>
+      <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+        <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
+              <use xlink:href="#twitter" />
+            </svg></a></li>
+        <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
+              <use xlink:href="#instagram" />
+            </svg></a></li>
+        <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
+              <use xlink:href="#facebook" />
+            </svg></a></li>
+      </ul>
+    </footer>
+  </div>
+
+
+
+  <script type="text/javascript" src="../js/general.js"></script>
+  <script type="text/javascript" src="../js/ABB_Proveedor.js"></script>
+  <script type="text/javascript" src="../js/Circular-json.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
