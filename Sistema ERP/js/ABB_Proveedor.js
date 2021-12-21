@@ -1,3 +1,6 @@
+//*************************************************************************************************************************************** */
+//************************************************************ABB PROVEEDORES************************************************************ */
+//*************************************************************************************************************************************** */
 class Proveedor {
     constructor(idP, nombre, direccion, telefono, correo) {
         this.idP = idP;
@@ -37,8 +40,8 @@ class ArbolBinario {
             } else if (raizP_aux.proveedor.idP < nuevo.proveedor.idP) {
                 raizP_aux.derecha = this.insertar2(raizP_aux.derecha, nuevo);
             } else {
-                alert("El ID del Proveedor ya existe. \nPor favor ingrese otro ID.")
-                console.log("El ID del Proveedor ya existe. Por favor ingrese otro ID.");
+                alert("El ID del Proveedor ya existe. \nPor favor ingrese otro ID.");
+                console.log("El ID del Proveedor ya existe. \nPor favor ingrese otro ID.");
             }
             return raizP_aux;
         } else {
@@ -47,8 +50,8 @@ class ArbolBinario {
         }
     }
 
-    inOrden(raizP_aux){
-        if(raizP_aux != null){
+    inOrden(raizP_aux) {
+        if (raizP_aux != null) {
             this.inOrden(raizP_aux.izquierda);
             console.log(raizP_aux.proveedor.idP);
             this.inOrden(raizP_aux.derecha);
@@ -70,89 +73,118 @@ class ArbolBinario {
         }
     }*/
 
-    generarDOT(){
-        let cadena="digraph ABB_prov {\n";
-        cadena+= this.generarCueropDOT(this.raizP);
-        cadena+="\n";
-        cadena+=this.enlazar(this.raizP);
-        cadena+="\n}";
+    generarDOT() {
+        let cadena = "digraph ABB_prov {\n";
+        cadena += this.NodosDOT(this.raizP);
+        cadena += "\n";
+        cadena += this.enramar(this.raizP);
+        cadena += "\n}";
         console.log(cadena);
         this.generarImg(cadena);
+        document.getElementById('textAreaProv').value = cadena;
     }
 
-    generarCueropDOT(raizP_aux){
-        let nodos ="";
-        if(raizP_aux != null){
-            nodos+= "p"+raizP_aux.proveedor.idP+"[label=\""+raizP_aux.proveedor.idP+"\"]\n";
-            nodos+=this.generarCueropDOT(raizP_aux.izquierda);
-            nodos+=this.generarCueropDOT(raizP_aux.derecha);
+    NodosDOT(raizP_aux) {
+        let nodos = "";
+        if (raizP_aux != null) {
+            nodos += "p" + raizP_aux.proveedor.idP + "[label=\"" + raizP_aux.proveedor.idP + "\n" + raizP_aux.proveedor.nombre + "\n" + raizP_aux.proveedor.direccion + "\n" + raizP_aux.proveedor.telefono + "\n" + raizP_aux.proveedor.correo + "\"]\n";
+            nodos += this.NodosDOT(raizP_aux.izquierda);
+            nodos += this.NodosDOT(raizP_aux.derecha);
         }
         return nodos;
     }
 
-    enramar(raizP_aux){
-        let cadena="";
-        if(raizP_aux != null){
+
+    enramar(raizP_aux) {
+        let cadena = "";
+        if (raizP_aux != null) {
             cadena += this.enramar(raizP_aux.izquierda);
             cadena += this.enramar(raizP_aux.derecha);
-            if(raizP_aux.izquierda != null){
-                cadena+="p"+raizP_aux.proveedor.idP + "-> p"+raizP_aux.izquierda.proveedor.idP+"\n";
+            if (raizP_aux.izquierda != null) {
+                cadena += "p" + raizP_aux.proveedor.idP + "-> p" + raizP_aux.izquierda.proveedor.idP + "\n";
             }
-            if(raizP_aux.derecha != null){
-                cadena+="p"+raizP_aux.proveedor.idP + "-> p"+raizP_aux.derecha.proveedor.idP+"\n";
-            } 
+            if (raizP_aux.derecha != null) {
+                cadena += "p" + raizP_aux.proveedor.idP + "-> p" + raizP_aux.derecha.proveedor.idP + "\n";
+            }
         }
         return cadena;
     }
 
-    generarImg(cadena){
-        var g = graphlibDot.read(cadena);
-        var render = new dagreD3.render();
-        render(d3.select("ABB_prov.svg"), g);
+    generarImg(cadena) {
+        try {
+            var g = graphlibDot.read(cadena);
+            var render = new dagreD3.render();
+            render(d3.select("ABB_prov.svg"), g);
+            /*try{
+                let dotPath = "C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe";
+                let cmd = dotPath + " -Tjpg " + cadena + " -o " + "reporte1.png";
+                Runtime.getRuntime().exec(cmd);*/
+        } catch {
+            alert("No se genero la imagen")
+        }
     }
 }
-
+//*************************************************************************************************************************************** */
+//***************************************************************************************************************************************
 let abb_Prov = new ArbolBinario();
 
-function registrarProveedor(){
-    var idProveedor=parseInt(document.getElementById("idProveedor").value); 
-    var nombre=document.getElementById("nombreProveedor").value; 
-    var direccion=document.getElementById("direccionProveedor").value; 
-    var telefono=document.getElementById("telefonoProveedor").value; 
-    var correo=document.getElementById("correoProveedor").value;
-    let proveedor = new Proveedor(idProveedor,nombre,direccion,telefono,correo);
-    console.log(idProveedor,nombre,direccion,telefono,correo);
+function registrarProveedor() {
+    var idProveedor = parseInt(document.getElementById("idProveedor").value);
+    var nombre = document.getElementById("nombreProveedor").value;
+    var direccion = document.getElementById("direccionProveedor").value;
+    var telefono = document.getElementById("telefonoProveedor").value;
+    var correo = document.getElementById("correoProveedor").value;
+    let proveedor = new Proveedor(idProveedor, nombre, direccion, telefono, correo);
+    console.log(idProveedor, nombre, direccion, telefono, correo);
     abb_Prov.insertar(proveedor);
-    //abb_Prov.inOrden(abb_Prov.raizP);
-    document.getElementById('idProveedor').value="";
-    document.getElementById('nombreProveedor').value="";
-    document.getElementById('direccionProveedor').value="";
-    document.getElementById('telefonoProveedor').value="";
-    document.getElementById('correoProveedor').value="";
+    document.getElementById('idProveedor').value = "";
+    document.getElementById('nombreProveedor').value = "";
+    document.getElementById('direccionProveedor').value = "";
+    document.getElementById('telefonoProveedor').value = "";
+    document.getElementById('correoProveedor').value = "";
 }
 
-function imprimir(){
+function irGraphizOnline() {
     abb_Prov.inOrden(abb_Prov.raizP)
 }
 
-function guardar_Estructuras(){
-    var abb_aux = CircularJSON.string(abb_Prov);
-    var abb_aux2 = JSON.stringify(abb_aux);
-    sessionStorage.setItem("abb_Prov",abb_aux2)
-    window.location="admin_carga-reporte.html";
+function mostrarGrafico1() {
+    abb_Prov.generarDOT();
 }
 
-function recuperar_Estructuras(){
-    var abb_aux = JSON.parse(sessionStorage.getItem("abb_Prov"));
-    abb_Prov = new ArbolBinario();
-    abb_aux = CircularJSON.parse(abb_aux); 
-    Object.assign(abb_aux,abb_aux);
-    /*let aux = lista_d.primero;
-    while(aux!= null){
-        var temp = aux.lista;
-        var lista_anidada = new lista_doble();
-        Object.assign(lista_anidada,temp);
-        aux.lista = lista_anidada;
-        aux = aux.siguiente;
-    }*/
+function imprimirABB() {
+    abb_Prov.inOrden(abb_Prov.raizP)
 }
+
+function guardar_Estructuras() {
+    if (abb_Prov.raizP != null) {
+        var abb_aux = CircularJSON.stringify(abb_Prov);
+        var abb_aux2 = JSON.stringify(abb_aux);
+        sessionStorage.setItem("abb_Prov", abb_aux2)
+    }
+}
+
+function recuperar_Estructuras() {
+    //actualizar
+    /*if (sessionStorage['name']) { 
+        console.log("There is 'name' in session storage ") 
+    } */
+    if (sessionStorage.length != 0) {
+        var abb_aux0 = JSON.parse(sessionStorage.getItem("abb_Prov"));
+        abb_Prov = new ArbolBinario();
+        abb_aux0 = CircularJSON.parse(abb_aux0);
+        Object.assign(abb_Prov, abb_aux0);
+        /*let aux = lista_d.primero;
+        while(aux!= null){
+            var temp = aux.lista;
+            var lista_anidada = new lista_doble();
+            Object.assign(lista_anidada,temp);
+            aux.lista = lista_anidada;
+            aux = aux.siguiente;
+        }*/
+    }
+}
+
+//*************************************************************************************************************************************** */
+//************************************************************ k ************************************************************ */
+//*************************************************************************************************************************************** */
