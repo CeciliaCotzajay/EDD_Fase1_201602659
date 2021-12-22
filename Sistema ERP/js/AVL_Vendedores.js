@@ -44,9 +44,9 @@ class AVL_Vendedores {
                 raiz_aux.izquierda = this.insertar2(raiz_aux.izquierda, nuevoNodo);
                 if (this.altura(raiz_aux.derecha) - this.altura(raiz_aux.izquierda) == -2) {
                     //-1 ROTACION IZQUIERDA --- IZQUIERDA
-                    if (nuevoNodo.vendedor.idV < raiz_aux.izquierda.vendedor.idV) { 
+                    if (nuevoNodo.vendedor.idV < raiz_aux.izquierda.vendedor.idV) {
                         raiz_aux = this.rotar_Izquierda(raiz_aux);
-                    //1 ROTACION IZQUIERDA --- DERECHA
+                        //1 ROTACION IZQUIERDA --- DERECHA
                     } else {
                         raiz_aux = this.rotarIzquierda_Derecha(raiz_aux);
                     }
@@ -54,10 +54,10 @@ class AVL_Vendedores {
             } else if (raiz_aux.vendedor.idV < nuevoNodo.vendedor.idV) {
                 raiz_aux.derecha = this.insertar2(raiz_aux.derecha, nuevoNodo);
                 if (this.altura(raiz_aux.derecha) - this.altura(raiz_aux.izquierda) == 2) {
-                     // 1 ROTACION DERECHA --- DERECHA
+                    // 1 ROTACION DERECHA --- DERECHA
                     if (nuevoNodo.vendedor.idV > raiz_aux.derecha.vendedor.idV) {
                         raiz_aux = this.rotar_Derecha(raiz_aux);
-                    //-1 ROTACION DERECHA --- IZQUIERDA
+                        //-1 ROTACION DERECHA --- IZQUIERDA
                     } else {
                         raiz_aux = this.rotarDerecha_Izquierda(raiz_aux);
                     }
@@ -126,7 +126,47 @@ class AVL_Vendedores {
             this.inOrden(raiz_aux.derecha);
         }
     }
-    
+
+    insertarClienteAVL(raiz_aux, idVenBuscar, nuevocliente) {
+        if (raiz_aux != null) {
+            if (raiz_aux.vendedor.idV == idVenBuscar) {
+                let listaCli = raiz_aux.vendedor.listaclientes;
+                listaCli.insertarCliente(nuevocliente);
+                console.log("idVendedor: ", raiz_aux.vendedor.idV);
+                listaCli.imprimirClientes();
+                return;
+            }
+            this.insertarClienteAVL(raiz_aux.izquierda);
+            this.insertarClienteAVL(raiz_aux.derecha);
+        }
+    }
+
+    eliminarClienteAVL(raiz_aux, idVenBuscar, idClienteElim) {
+        if (raiz_aux != null) {
+            if (raiz_aux.vendedor.idV == idVenBuscar) {
+                let listaCli = raiz_aux.vendedor.listaclientes;
+                listaCli.eliminarCliente(idClienteElim);
+                console.log("idVendedor: ", raiz_aux.vendedor.idV);
+                listaCli.imprimirClientes();
+                return;
+            }
+            this.eliminarClienteAVL(raiz_aux.izquierda);
+            this.eliminarClienteAVL(raiz_aux.derecha);
+        }
+    }
+
+    obtenerListaC(raiz_aux, idVenBuscar) {
+        let listac = null;
+        if (raiz_aux != null) {
+            if (raiz_aux.vendedor.idV == idVenBuscar) {
+                listac = raiz_aux.vendedor.listaclientes;
+                return listac;
+            }
+            this.insertarClienteAVL(raiz_aux.izquierda);
+            this.insertarClienteAVL(raiz_aux.derecha);
+        }
+    }
+
     /*preorden(raiz_aux) {
         if (raiz_aux != null) {
             console.log(raiz_aux.vendedor.idV + " " + raiz_aux.vendedor.nombre);
@@ -157,7 +197,7 @@ class AVL_Vendedores {
     NodosDOT(raiz_aux) {
         let nodos = "";
         if (raiz_aux != null) {
-            nodos += "n" + raiz_aux.vendedor.idV + "[label=\"" + raiz_aux.vendedor.idV + "\"]\n";//ñññññññññññññ
+            nodos += "n" + raiz_aux.vendedor.idV + "[label=\"" + raiz_aux.vendedor.idV + "\n" + raiz_aux.vendedor.nombre + "\n" + raiz_aux.vendedor.correo + "\n" + raiz_aux.vendedor.edad + "\"]\n";
             nodos += this.NodosDOT(raiz_aux.izquierda);
             nodos += this.NodosDOT(raiz_aux.derecha);
         }
@@ -195,36 +235,36 @@ class AVL_Vendedores {
 //************************************************************LISTA-DOBLE_CLIENTES******************************************************* */
 //*************************************************************************************************************************************** */
 class Cliente {
-    constructor(idC, nombre, correo){
+    constructor(idC, nombre, correo) {
         this.idC = idC;
         this.nombre = nombre;
         this.correo = correo;
     }
 }
 
-class Nodo_Cliente{
-    constructor(cliente){
+class Nodo_Cliente {
+    constructor(cliente) {
         this.cliente = cliente;
         this.siguiente = null;
         this.anterior = null;
     }
 }
 
-class Lista_Doble{
-    constructor(){
-        this.primero=null;
+class Lista_Doble {
+    constructor() {
+        this.primero = null;
         this.tam = 0;
     }
 
-    insertar(cliente){
+    insertarCliente(cliente) {
         let nuevo = new Nodo_Cliente(cliente);
-        if(this.primero == null){
+        if (this.primero == null) {
             this.primero = nuevo;
             this.tam++;
-        }else{
+        } else {
             let aux = this.primero;
-            while(aux.siguiente != null){
-                if(aux.cliente.idC == cliente.idC){
+            while (aux.siguiente != null) {
+                if (aux.cliente.idC == cliente.idC) {
                     alert("El ID del Cliente ya existe. \nPor favor ingrese otro ID.");
                     return;
                 }
@@ -241,7 +281,7 @@ class Lista_Doble{
             let aux = this.primero;
             console.log("***** Lista Clientes *****");
             while (aux != null) {
-                console.log(aux.cliente.idC + " " + aux.cliente.nombre);
+                console.log(aux.cliente.idC, aux.cliente.nombre, aux.cliente.correo);
                 aux = aux.siguiente;
             }
         }
@@ -250,7 +290,7 @@ class Lista_Doble{
         }
     }
 
-    eliminarCliente(idElim){
+    eliminarCliente(idElim) {
         if (this.primero != null) {
             let aux = this.primero;
             let ant = null;
@@ -287,6 +327,25 @@ class Lista_Doble{
             alert("No hay clientes en lista!");
         }
     }
+
+    generarDotClientes() {
+        let cadena = "digraph arbol_ven {\n";
+        cadena += "node [margin=0 fontcolor=black fontsize=48 width=0.8 shape=invhouse style=filled]";
+        if (this.primero != null) {
+            cadena += "c" + this.primero.cliente.idC + "[label=\"" + raiz_aux.cliente.idC + "\n" + raiz_aux.cliente.nombre + "\n" + raiz_aux.cliente.correo + "\"]\n";
+            let anterior = "c" + this.primero.cliente.idC;
+            let aux = this.primero;
+            while (aux != null) {
+                cadena += "c" + aux.cliente.idC + "[label=\"" + raiz_aux.cliente.idC + "\n" + raiz_aux.cliente.nombre + "\n" + raiz_aux.cliente.correo + "\"]\n";
+                cadena += anterior + "->" + "c" + aux.cliente.idC + "[dir=both]" + ";\n";
+                anterior = "c" + auxcliente.idC;
+                aux = aux.siguiente;
+            }
+        }
+        cadena += "\n}";
+        console.log(cadena);
+        document.getElementById('textAreaCli').value = cadena;
+    }
 }
 //*************************************************************************************************************************************** */
 //***************************************************************************************************************************************
@@ -299,8 +358,8 @@ function registrarVendedor() {
     var correo = document.getElementById("correoVendedor").value;
     var edad = document.getElementById("edadVendedor").value;
     var password = document.getElementById("passwordVendedor").value;
-    console.log(idVendedor,nombre,edad,correo,password);
-    arbol_ven.insertar(new Vendedor(idVendedor,nombre,edad,correo,password,new Lista_Doble()));
+    console.log(idVendedor, nombre, edad, correo, password);
+    arbol_ven.insertar(new Vendedor(idVendedor, nombre, edad, correo, password, new Lista_Doble()));
     document.getElementById('idVendedor').value = "";
     document.getElementById('nombreVendedor').value = "";
     document.getElementById('correoVendedor').value = "";
@@ -308,12 +367,38 @@ function registrarVendedor() {
     document.getElementById('passwordVendedor').value = "";
 }
 
-function cargaMasivaVendedor(){
+function registrarCliente() {
+    recuperar_EstructuraAVL();
+    var idCliente = parseInt(document.getElementById("idCliente").value);
+    var nombre = document.getElementById("nombreCliente").value;
+    var correo = document.getElementById("correoCliente").value;
+    var idVenInsertar = parseInt(document.getElementById("idVendedorCliente").value);
+    let nuevocliente = new Cliente(idCliente, nombre, correo);
+    console.log(idCliente, nombre, correo, idVenInsertar);
+    arbol_ven.insertarClienteAVL(arbol_ven.raiz, idVenInsertar, nuevocliente);
+    document.getElementById('idCliente').value = "";
+    document.getElementById('nombreCliente').value = "";
+    document.getElementById('correoVendedor').value = "";
+    document.getElementById('correoCliente').value = "";
+    document.getElementById('idVendedorCliente').value = "";
+}
+
+function cargaMasivaVendedor() {
     var data = document.getElementById('archivoUsuarios').files;
-    if(!data.length){
-      alert('No se ha seleccionado el archivo Vendedores');
-    }else{
+    if (!data.length) {
+        alert('No se ha seleccionado el archivo Vendedores');
+    } else {
         var cadena = readFileavl(data[0]);
+        console.log(cadena);
+    }
+}
+
+function cargaMasivaCliente(){
+    var data = document.getElementById('archivoClientes').files;
+    if (!data.length) {
+        alert('No se ha seleccionado el archivo Clientes');
+    } else {
+        var cadena = readFileCli(data[0]);
         console.log(cadena);
     }
 }
@@ -322,20 +407,46 @@ function readFileavl(file) {
     const reader = new FileReader();
     reader.onload = function () {
         let contenido = reader.result;
-        console.log(typeof(reader.result));
+        console.log(typeof (reader.result));
         console.log(reader.result);
         var objvend = JSON.parse(contenido);
-        console.log(objvend, typeof(objvend));
+        console.log(objvend, typeof (objvend));
         for (let value of objvend.vendedores) {
             console.log(value);
             var idVendedor = parseInt(value.id);
             var nombre = value.nombre;
             var edad = value.edad;
             var correo = value.correo;
-            var password = value.password;            
-            arbol_ven.insertar(new Vendedor(idVendedor,nombre,edad,correo,password,new Lista_Doble()));
-            console.log(idVendedor,nombre,edad,correo,password);
-          }
+            var password = value.password;
+            arbol_ven.insertar(new Vendedor(idVendedor, nombre, edad, correo, password, new Lista_Doble()));
+            console.log(idVendedor, nombre, edad, correo, password);
+        }
+    }
+    reader.readAsText(file);
+}
+
+function readFileCli(file){
+    const reader = new FileReader();
+    reader.onload = function () {
+        let contenido = reader.result;
+        //console.log(typeof (reader.result));
+        console.log(reader.result);
+        var objcli = JSON.parse(contenido);
+        console.log(objcli, typeof (objcli));
+        for (let value of objcli.vendedores) {
+            //console.log(value);
+            var idVendedor = parseInt(value.id);
+            var listaclientesAr = value.clientes;
+            console.log("idv:",idVendedor);
+            for (let valueCli of listaclientesAr) {
+                var idCliente = parseInt(valueCli.id);
+                var nombre = valueCli.nombre;
+                var correo = valueCli.correo;
+                c= new Cliente(idCliente,nombre,correo);
+                arbol_ven.insertarClienteAVL(arbol_ven.raiz, idVendedor, c);
+                console.log(idCliente,nombre,correo);
+            }
+        }
     }
     reader.readAsText(file);
 }
@@ -345,8 +456,27 @@ function mostrarGrafico2() {
     arbol_ven.generarDOT_AVL();
 }
 
+function mostrarGrafico3(){
+    recuperar_EstructuraAVL();
+    var idCliente = parseInt(document.getElementById("idvendedorCli").value);
+    listac = arbol_ven.obtenerListaC(arbol_ven,idCliente);
+    listac.generarDotClientes();
+}
+
 function imprimiraAVL() {
     arbol_ven.inOrden(arbol_ven.raiz);
+}
+
+function imprimirListaCliAVL(){
+    var idCliente = parseInt(document.getElementById("idvendedorCli").value);
+    listac = arbol_ven.obtenerListaC(arbol_ven,idCliente);
+    listac.imprimirClientes();
+}
+
+function eliminarCli(){
+    var idCliente = parseInt(document.getElementById("idCliente").value);
+    var idVen = parseInt(document.getElementById("idVendedorCliente").value);
+    arbol_ven.eliminarClienteAVL(arbol_ven,idVen,idCliente);
 }
 //*************************************************************************************************************************************** */
 //************************************************************ k ************************************************************ */
@@ -367,29 +497,33 @@ function recuperar_EstructuraAVL() {
     arbol_ven = new AVL_Vendedores();
     avl_aux0 = CircularJSON.parse(avl_aux0);
     Object.assign(arbol_ven, avl_aux0);
+    
 }
 
 function deshabProv() {
     frm = document.forms['FORMPROV'];
-    for(i=0; ele=frm.elements[i]; i++)
-      ele.disabled=true;
+    for (i = 0; ele = frm.elements[i]; i++)
+        ele.disabled = true;
 }
 
 
 
 /*arbol = new AVL_Vendedores();
 
-arbol.insertar(new Vendedor(30,"jose",25,"correo","4561",new Lista_Doble()));
-arbol.insertar(new Vendedor(40,"jose",25,"correo","4561",null));
-arbol.insertar(new Vendedor(20,"jose",25,"correo","4561",null));
-arbol.insertar(new Vendedor(10,"jose",25,"correo","4561",null));
-arbol.insertar(new Vendedor(5,"jose",25,"correo","4561",null));
-arbol.insertar(new Vendedor(70,"jose",25,"correo","4561",null));
-arbol.insertar(new Vendedor(7,"jose",25,"correo","4561",null));
-arbol.insertar(new Vendedor(100,"jose",25,"correo","4561",null));
+arbol.insertar(new Vendedor(30, "jose", 25, "correo", "4561", new Lista_Doble()));
+arbol.insertar(new Vendedor(40, "jose", 25, "correo", "4561", null));
+arbol.insertar(new Vendedor(20, "jose", 25, "correo", "4561", null));
+arbol.insertar(new Vendedor(10, "jose", 25, "correo", "4561", null));
+arbol.insertar(new Vendedor(5, "jose", 25, "correo", "4561", null));
+arbol.insertar(new Vendedor(70, "jose", 25, "correo", "4561", null));
+arbol.insertar(new Vendedor(7, "jose", 25, "correo", "4561", null));
+arbol.insertar(new Vendedor(100, "jose", 25, "correo", "4561", null));
 
 
-arbol.inOrden(arbol.raiz);*/
+arbol.inOrden(arbol.raiz)
+
+arbol.insertarClienteAVL(arbol.raiz, 30, new Cliente(1, "ramon", "correo"));
+arbol.insertarClienteAVL(arbol.raiz, 30, new Cliente(20, "ramon", "correo"));*/
 
 //arbol.generarDot();
 

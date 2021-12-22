@@ -88,9 +88,10 @@
                         <h2>Clientes</h2><br>
                         <form>
                           <div class="input-group">
+                            <button type="button" class="btn btn-outline-primary" onclick="recuperar_EstructuraAVL()">Actualizar</button><!--*******************imprimirABB*******************-->
                             <input type="file" class="form-control" id="archivoClientes"
                               aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="doc/json, .json" />
-                            <button class="btn btn-outline-primary" type="button" id="btnClientes">Cargar</button>
+                            <button class="btn btn-outline-primary" type="button" onclick="cargaMasivaCliente()">Cargar</button>
                           </div>
                         </form>
                       </div>
@@ -153,14 +154,17 @@
                     <div class="row">
                       <div class="col-md-6">
                         <div class="input-group mb-3">
-                          <input type="text" class="form-control" placeholder="ID Cliente"
-                            aria-label="Recipient's username" aria-describedby="button-addon2">
-                          <button class="btn btn-outline-primary" type="button"
-                            onclick="registrarVendedor()">Mirar</button>
+                          <input type="text" class="form-control" placeholder="ID Vendedor" aria-label="Recipient's username" id="idvendedorCli" aria-describedby="button-addon2">
+                          <button class="btn btn-outline-primary" type="button" onclick="mostrarGrafico3()">Mirar</button>
+                          <a href="https://dreampuf.github.io/GraphvizOnline" target="_blank"><button type="button" class="btn btn-primary" onclick="imprimiraAVL()">Ir a Graphviz online</button></a>
                         </div>
                       </div>
                     </div>
                     <img src="../img/luna.png" class="img-fluid" alt="...">
+                    <br><br>
+                    <div class="form-floating">
+                      <textarea class="form-control" placeholder="DOT" id="textAreaCli" style="height: 300px"></textarea>
+                    </div>
                   </div>
                   <!--REPORTE EVENTOS-->
                   <div class="tab-pane fade" id="profile4" role="tabpanel" aria-labelledby="profile-tab">
