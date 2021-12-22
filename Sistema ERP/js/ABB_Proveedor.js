@@ -144,6 +144,16 @@ function registrarProveedor() {
     document.getElementById('correoProveedor').value = "";
 }
 
+function cargaMasivaProveedor(){
+    var data = document.getElementById('archivoProveedores').files;
+    if(!data.length){
+      alert('No se ha seleccionado el archivo Proveedores');
+    }else{
+        var cadena = readFile(data[0]);
+        console.log(cadena);
+    }
+}
+
 function irGraphizOnline() {
     abb_Prov.inOrden(abb_Prov.raizP)
 }
@@ -155,12 +165,25 @@ function mostrarGrafico1() {
 function imprimirABB() {
     abb_Prov.inOrden(abb_Prov.raizP)
 }
+//*************************************************************************************************************************************** */
+//************************************************************ k ************************************************************ */
+//*************************************************************************************************************************************** */
+
+function readFile(file) {
+    const reader = new FileReader();
+    reader.onload = function () {
+        //console.log(reader.result);
+    }
+    reader.readAsText(file);
+    return reader.result;
+}
 
 function guardar_Estructuras() {
     if (abb_Prov.raizP != null) {
         var abb_aux = CircularJSON.stringify(abb_Prov);
         var abb_aux2 = JSON.stringify(abb_aux);
-        sessionStorage.setItem("abb_Prov", abb_aux2)
+        sessionStorage.setItem("abb_Prov", abb_aux2);
+        guardar_EstructuraAVL();
     }
 }
 
@@ -168,21 +191,12 @@ function recuperar_Estructuras() {
     //actualizar
     /*if (sessionStorage['name']) { 
         console.log("There is 'name' in session storage ") 
-    } */
-    if (sessionStorage.length != 0) {
-        var abb_aux0 = JSON.parse(sessionStorage.getItem("abb_Prov"));
-        abb_Prov = new ArbolBinario();
-        abb_aux0 = CircularJSON.parse(abb_aux0);
-        Object.assign(abb_Prov, abb_aux0);
-        /*let aux = lista_d.primero;
-        while(aux!= null){
-            var temp = aux.lista;
-            var lista_anidada = new lista_doble();
-            Object.assign(lista_anidada,temp);
-            aux.lista = lista_anidada;
-            aux = aux.siguiente;
-        }*/
-    }
+    } */        var abb_aux0 = JSON.parse(sessionStorage.getItem("abb_Prov"));
+    abb_Prov = new ArbolBinario();
+    abb_aux0 = CircularJSON.parse(abb_aux0);
+    Object.assign(abb_Prov, abb_aux0);
+    recuperar_EstructuraAVL();
+
 }
 
 //*************************************************************************************************************************************** */

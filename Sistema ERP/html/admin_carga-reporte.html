@@ -76,7 +76,7 @@
                           <div class="input-group">
                             <input type="file" class="form-control" id="archivoUsuarios"
                               aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="doc/json, .json" />
-                            <button class="btn btn-outline-success" type="button" id="btnVendedores">Cargar</button>
+                            <button class="btn btn-outline-success" type="button" onclick="cargaMasivaVendedor()">Cargar</button>
                           </div>
                         </form>
                       </div>
@@ -98,11 +98,11 @@
                       <div class="col-md-8">
                         <br>
                         <h2>Proveedores</h2><br>
-                        <form>
+                        <form enctype="multipart/form-data">
                           <div class="input-group">
                             <input type="file" class="form-control" id="archivoProveedores"
                               aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="doc/json, .json" />
-                            <button class="btn btn-outline-success" type="button" id="btnProveedores">Cargar</button>
+                            <button class="btn btn-outline-success" type="button" onclick="cargaMasivaProveedor()">Cargar</button>
                           </div>
                         </form>
                       </div>
@@ -136,9 +136,14 @@
                   <!--REPORTE VENDEDOR-->
                   <div class="tab-pane fade" id="profile2" role="tabpanel" aria-labelledby="profile-tab">
                     <h3>Reporte AVL Vendedores</h3>
-                    <button type="button" class="btn btn-outline-success" onclick="reporteVendedor()">Mirar</button>
+                    <button type="button" class="btn btn-outline-success" onclick="mostrarGrafico2()">Mirar</button>
+                    <a href="https://dreampuf.github.io/GraphvizOnline" target="_blank"><button type="button" class="btn btn-primary" onclick="imprimiraAVL()">Ir a Graphviz online</button></a>
                     <br><br>
                     <img src="../img/luna.png" class="img-fluid" alt="...">
+                    <br><br>
+                    <div class="form-floating">
+                      <textarea class="form-control" placeholder="DOT" id="textAreaVen" style="height: 300px"></textarea>
+                    </div>
                   </div>
                   <!--REPORTE CLIENTES-->
                   <div class="tab-pane fade" id="profile3" role="tabpanel" aria-labelledby="profile-tab">
@@ -203,6 +208,7 @@
     </footer>
   </div>
 
+  <script type="text/javascript" src="../js/AVL_Vendedores.js"></script>
   <script type="text/javascript" src="../js/general.js"></script>
   <script type="text/javascript" src="../js/ABB_Proveedor.js"></script>
   <script type="text/javascript" src="../js/Circular-json.js"></script>
