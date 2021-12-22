@@ -40,8 +40,8 @@ class ArbolBinario {
             } else if (raizP_aux.proveedor.idP < nuevo.proveedor.idP) {
                 raizP_aux.derecha = this.insertar2(raizP_aux.derecha, nuevo);
             } else {
-                alert("El ID del Proveedor ya existe. \nPor favor ingrese otro ID.");
-                console.log("El ID del Proveedor ya existe. \nPor favor ingrese otro ID.");
+                alert("El ID del Proveedor ya existe. \nPor favor ingrese otro ID."+nuevo.proveedor.idP);
+                //console.log("El ID del Proveedor ya existe. \nPor favor ingrese otro ID.");
             }
             return raizP_aux;
         } else {
@@ -129,6 +129,7 @@ class ArbolBinario {
 let abb_Prov = new ArbolBinario();
 
 function registrarProveedor() {
+    recuperar_Estructuras();
     var idProveedor = parseInt(document.getElementById("idProveedor").value);
     var nombre = document.getElementById("nombreProveedor").value;
     var direccion = document.getElementById("direccionProveedor").value;
@@ -149,8 +150,7 @@ function cargaMasivaProveedor(){
     if(!data.length){
       alert('No se ha seleccionado el archivo Proveedores');
     }else{
-        var cadena = readFile(data[0]);
-        console.log(cadena);
+        readFile(data[0]);
     }
 }
 
@@ -159,6 +159,7 @@ function irGraphizOnline() {
 }
 
 function mostrarGrafico1() {
+    recuperar_Estructuras();
     abb_Prov.generarDOT();
 }
 
@@ -172,31 +173,46 @@ function imprimirABB() {
 function readFile(file) {
     const reader = new FileReader();
     reader.onload = function () {
-        //console.log(reader.result);
+        let contenido = reader.result;
+        console.log(typeof(reader.result));
+        console.log(reader.result);
+        var objprov = JSON.parse(contenido);
+        console.log(objprov, typeof(objprov));
+        recuperar_Estructuras();
+        for (let value of objprov.proveedores) {
+            console.log(value);
+            var idProveedor = parseInt(value.id);
+            var nombre = value.nombre;
+            var direccion = value.direccion;
+            var telefono = value.telefono;
+            var correo = value.correo;
+            let proveedor = new Proveedor(idProveedor, nombre, direccion, telefono, correo);
+            console.log(idProveedor, nombre, direccion, telefono, correo);
+            abb_Prov.insertar(proveedor);
+            guardar_Estructuras();
+          }
     }
     reader.readAsText(file);
-    return reader.result;
 }
 
 function guardar_Estructuras() {
+    imprimirABB()
     if (abb_Prov.raizP != null) {
         var abb_aux = CircularJSON.stringify(abb_Prov);
         var abb_aux2 = JSON.stringify(abb_aux);
         sessionStorage.setItem("abb_Prov", abb_aux2);
-        guardar_EstructuraAVL();
     }
 }
 
 function recuperar_Estructuras() {
-    //actualizar
-    /*if (sessionStorage['name']) { 
-        console.log("There is 'name' in session storage ") 
-    } */        var abb_aux0 = JSON.parse(sessionStorage.getItem("abb_Prov"));
+    imprimirABB();
+    var abb_aux0 = JSON.parse(sessionStorage.getItem("abb_Prov"));
     abb_Prov = new ArbolBinario();
     abb_aux0 = CircularJSON.parse(abb_aux0);
     Object.assign(abb_Prov, abb_aux0);
-    recuperar_EstructuraAVL();
-
+}
+function reset(){
+    sessionStorage.clear();
 }
 
 //*************************************************************************************************************************************** */

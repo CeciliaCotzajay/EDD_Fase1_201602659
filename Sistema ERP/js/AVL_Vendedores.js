@@ -29,12 +29,12 @@ class AVL_Vendedores {
         this.raiz = null;
     }
 
-    insertar(vendedor) {
-        let nuevoNodo = new nodo_Vendedor(vendedor);
+    insertar(V) {
+        let nuevo = new nodo_Vendedor(V);
         if (this.raiz == null) {
-            this.raiz = nuevoNodo;
+            this.raiz = nuevo;
         } else {
-            this.raiz = this.insertar2(this.raiz, nuevoNodo);
+            this.raiz = this.insertar2(this.raiz, nuevo);
         }
     }
 
@@ -143,8 +143,8 @@ class AVL_Vendedores {
         }
     }*/
 
-    generarDot() {
-        let cadena = "digraph AVL_ven {\n";
+    generarDOT_AVL() {
+        let cadena = "digraph arbol_ven {\n";
         cadena += this.NodosDOT(this.raiz);
         cadena += "\n";
         cadena += this.enramar(this.raiz);
@@ -185,7 +185,7 @@ class AVL_Vendedores {
         try {
             var g = graphlibDot.read(cadena);
             var render = new dagreD3.render();
-            render(d3.select("AVL_ven.svg"), g);
+            render(d3.select("arbol_ven.svg"), g);
         } catch {
             alert("No se genero la imagen")
         }
@@ -290,16 +290,17 @@ class Lista_Doble{
 }
 //*************************************************************************************************************************************** */
 //***************************************************************************************************************************************
-let avl_ven = new AVL_Vendedores();
+let arbol_ven = new AVL_Vendedores();
 
 function registrarVendedor() {
+    recuperar_EstructuraAVL();
     var idVendedor = parseInt(document.getElementById("idVendedor").value);
     var nombre = document.getElementById("nombreVendedor").value;
     var correo = document.getElementById("correoVendedor").value;
     var edad = document.getElementById("edadVendedor").value;
     var password = document.getElementById("passwordVendedor").value;
     console.log(idVendedor,nombre,edad,correo,password);
-    avl_ven.insertar(new Vendedor(idVendedor,nombre,edad,correo,password,new Lista_Doble()));
+    arbol_ven.insertar(new Vendedor(idVendedor,nombre,edad,correo,password,new Lista_Doble()));
     document.getElementById('idVendedor').value = "";
     document.getElementById('nombreVendedor').value = "";
     document.getElementById('correoVendedor').value = "";
@@ -312,40 +313,71 @@ function cargaMasivaVendedor(){
     if(!data.length){
       alert('No se ha seleccionado el archivo Vendedores');
     }else{
-        var cadena = readFile(data[0]);
+        var cadena = readFileavl(data[0]);
         console.log(cadena);
     }
 }
 
+function readFileavl(file) {
+    const reader = new FileReader();
+    reader.onload = function () {
+        let contenido = reader.result;
+        console.log(typeof(reader.result));
+        console.log(reader.result);
+        var objvend = JSON.parse(contenido);
+        console.log(objvend, typeof(objvend));
+        for (let value of objvend.vendedores) {
+            console.log(value);
+            var idVendedor = parseInt(value.id);
+            var nombre = value.nombre;
+            var edad = value.edad;
+            var correo = value.correo;
+            var password = value.password;            
+            arbol_ven.insertar(new Vendedor(idVendedor,nombre,edad,correo,password,new Lista_Doble()));
+            console.log(idVendedor,nombre,edad,correo,password);
+          }
+    }
+    reader.readAsText(file);
+}
+
 function mostrarGrafico2() {
-    avl_ven.generarDOT();
+    recuperar_EstructuraAVL();
+    arbol_ven.generarDOT_AVL();
 }
 
 function imprimiraAVL() {
-    avl_ven.inOrden(avl_ven.raiz)
+    arbol_ven.inOrden(arbol_ven.raiz);
 }
 //*************************************************************************************************************************************** */
 //************************************************************ k ************************************************************ */
 //*************************************************************************************************************************************** */
 
 function guardar_EstructuraAVL() {
-    if (avl_ven.raiz != null) {
-        var avl_aux = CircularJSON.stringify(avl_ven);
+    imprimiraAVL();
+    if (arbol_ven.raiz != null) {
+        var avl_aux = CircularJSON.stringify(arbol_ven);
         var avl_aux2 = JSON.stringify(avl_aux);
-        sessionStorage.setItem("avl_ven", avl_aux2)
+        sessionStorage.setItem("arbol_ven", avl_aux2)
     }
 }
 
 function recuperar_EstructuraAVL() {
-    var avl_aux0 = JSON.parse(sessionStorage.getItem("avl_ven"));
-    avl_ven = new ArbolBinario();
+    imprimiraAVL();
+    var avl_aux0 = JSON.parse(sessionStorage.getItem("arbol_ven"));
+    arbol_ven = new AVL_Vendedores();
     avl_aux0 = CircularJSON.parse(avl_aux0);
-    Object.assign(avl_ven, avl_aux0);
+    Object.assign(arbol_ven, avl_aux0);
+}
+
+function deshabProv() {
+    frm = document.forms['FORMPROV'];
+    for(i=0; ele=frm.elements[i]; i++)
+      ele.disabled=true;
 }
 
 
 
-arbol = new AVL_Vendedores();
+/*arbol = new AVL_Vendedores();
 
 arbol.insertar(new Vendedor(30,"jose",25,"correo","4561",new Lista_Doble()));
 arbol.insertar(new Vendedor(40,"jose",25,"correo","4561",null));
@@ -357,6 +389,8 @@ arbol.insertar(new Vendedor(7,"jose",25,"correo","4561",null));
 arbol.insertar(new Vendedor(100,"jose",25,"correo","4561",null));
 
 
-arbol.inOrden(arbol.raiz);
+arbol.inOrden(arbol.raiz);*/
 
 //arbol.generarDot();
+
+

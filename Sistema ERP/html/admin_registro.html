@@ -14,7 +14,7 @@
   <title>Sistema ERP</title>
 </head>
 
-<body style="background-image: url(../img/fg.png);" onload="recuperar_Estructuras()">
+<body style="background-image: url(../img/fg.png);">
   <ul class="nav nav-tabs" style="background-color: rgb(1, 1, 87);">
     <li class="nav-item">
       <a class="nav-link" href="Login.html"><img src="../img/logo.jpg" alt="" width="40" height="34"></a>
@@ -66,7 +66,7 @@
                   <div class="row">
                     <div class="col-md-8">
                       <h3>Proveedor</h3>
-                      <form class="row g-3">
+                      <form class="row g-3" name="FORMPROV">
                         <div class="col-md-6">
                           <label for="inputEmail4" class="form-label">ID</label>
                           <input type="text" class="form-control" id="idProveedor">
@@ -89,6 +89,7 @@
                         </div>
                         <div class="col-12"><br>
                           <button type="button" class="btn btn-outline-primary" onclick="registrarProveedor()">Registrar</button>
+                          <button type="button" class="btn btn-primary" onclick="guardar_Estructuras()">Guardar</button><!--*******************imprimirABB*******************-->
                         </div>
                       </form>
                     </div>
@@ -101,28 +102,28 @@
                       <h3>Vendedor</h3>
                       <form class="row g-3">
                         <div class="col-md-6">
-                          <label for="inputEmail4" class="form-label">ID</label>
+                          <label for="inputEmail40" class="form-label">ID</label>
                           <input type="text" class="form-control" id="idVendedor">
                         </div>
                         <div class="col-md-6">
-                          <label for="inputAddress" class="form-label">Nombre</label>
+                          <label for="inputAddress40" class="form-label">Nombre</label>
                           <input type="text" class="form-control" id="nombreVendedor">
                         </div>
                         <div class="col-12">
-                          <label for="inputAddress" class="form-label">Correo</label>
+                          <label for="inputAddress41" class="form-label">Correo</label>
                           <input type="text" class="form-control" id="correoVendedor" placeholder="ejemplo@ejemplo.com">
                         </div>
                         <div class="col-md-6">
-                          <label for="inputEmail4" class="form-label">Edad</label>
+                          <label for="inputEmail41" class="form-label">Edad</label>
                           <input type="text" class="form-control" id="edadVendedor">
                         </div>
                         <div class="col-md-6">
-                          <label for="inputEmail4" class="form-label">Password</label>
+                          <label for="inputEmail42" class="form-label">Password</label>
                           <input type="password" class="form-control" id="passwordVendedor" placeholder="Password">
                         </div>
                         <div class="col-12"><br>
                           <button type="button" class="btn btn-outline-success" onclick="registrarVendedor()">Registrar</button>
-                          <button type="button" class="btn btn-outline-primary" onclick="imprimiraAVL()">imprimir</button>
+                          <button type="button" class="btn btn-outline-primary" onclick="guardar_EstructuraAVL()">Guardar</button>
                         </div>
                       </form>
                     </div>
@@ -135,19 +136,19 @@
                       <h3>Cliente</h3>
                       <form class="row g-3">
                         <div class="col-md-6">
-                          <label for="inputEmail4" class="form-label">ID</label>
+                          <label for="inputEmail44" class="form-label">ID</label>
                           <input type="text" class="form-control" id="idCliente">
                         </div>
                         <div class="col-md-6">
-                          <label for="inputAddress" class="form-label">Nombre</label>
+                          <label for="inputAddres" class="form-label">Nombre</label>
                           <input type="text" class="form-control" id="nombreCliente">
                         </div>
                         <div class="col-12">
-                          <label for="inputAddress" class="form-label">Correo</label>
+                          <label for="inputAddresss" class="form-label">Correo</label>
                           <input type="text" class="form-control" id="correoCliente" placeholder="ejemplo@ejemplo.com">
                         </div>
                         <div class="col-md-6">
-                          <label for="inputEmail4" class="form-label">ID Vendedor</label>
+                          <label for="inputEmail45" class="form-label">ID Vendedor</label>
                           <input type="text" class="form-control" id="idVendedorCliente">
                         </div>
                         <div class="col-12"><br>
@@ -196,7 +197,7 @@
             </div>
           </div>
           <div class="col-12 offset-md-10">
-            <button type="button" class="btn btn-primary" onclick="guardar_Estructuras()">Guardar Cambios</button><!--*******************imprimirABB*******************-->
+            <button type="button" class="btn btn-primary" onclick="reset()">resetear</button>
           </div>
         </div>
       </div>

@@ -14,7 +14,7 @@
   <title>Sistema ERP</title>
 </head>
 
-<body style="background-image: url(../img/fg.png);" onload="recuperar_Estructuras()">
+<body style="background-image: url(../img/fg.png);">
   <ul class="nav nav-tabs" style="background-color: rgb(1, 1, 87);">
     <li class="nav-item">
       <a class="nav-link" href="Login.html"><img src="../img/logo.jpg" alt="" width="40" height="34"></a>
@@ -74,9 +74,10 @@
                         <h2>Vendedores</h2><br>
                         <form>
                           <div class="input-group">
+                            <button type="button" class="btn btn-outline-success" onclick="recuperar_EstructuraAVL()">Actualizar</button><!--*******************imprimirABB*******************-->
                             <input type="file" class="form-control" id="archivoUsuarios"
                               aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="doc/json, .json" />
-                            <button class="btn btn-outline-success" type="button" onclick="cargaMasivaVendedor()">Cargar</button>
+                            <button class="btn btn-success" type="button" onclick="cargaMasivaVendedor()">Cargar</button>
                           </div>
                         </form>
                       </div>
@@ -100,6 +101,7 @@
                         <h2>Proveedores</h2><br>
                         <form enctype="multipart/form-data">
                           <div class="input-group">
+                            <button type="button" class="btn btn-outline-success" onclick="recuperar_Estructuras()">Actualizar</button><!--*******************imprimirABB*******************-->
                             <input type="file" class="form-control" id="archivoProveedores"
                               aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="doc/json, .json" />
                             <button class="btn btn-outline-success" type="button" onclick="cargaMasivaProveedor()">Cargar</button>
