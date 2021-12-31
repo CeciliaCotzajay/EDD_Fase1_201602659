@@ -398,8 +398,7 @@ function cargaMasivaCliente(){
     if (!data.length) {
         alert('No se ha seleccionado el archivo Clientes');
     } else {
-        var cadena = readFileCli(data[0]);
-        console.log(cadena);
+        readFileavl(data[0]);
     }
 }
 

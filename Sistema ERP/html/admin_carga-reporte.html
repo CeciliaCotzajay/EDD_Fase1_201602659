@@ -75,8 +75,7 @@
                         <form>
                           <div class="input-group">
                             <button type="button" class="btn btn-outline-success" onclick="recuperar_EstructuraAVL()">Actualizar</button><!--*******************imprimirABB*******************-->
-                            <input type="file" class="form-control" id="archivoUsuarios"
-                              aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="doc/json, .json" />
+                            <input type="file" class="form-control" id="archivoUsuarios" aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="doc/json, .json" />
                             <button class="btn btn-success" type="button" onclick="cargaMasivaVendedor()">Cargar</button>
                           </div>
                         </form>
@@ -89,9 +88,8 @@
                         <form>
                           <div class="input-group">
                             <button type="button" class="btn btn-outline-primary" onclick="recuperar_EstructuraAVL()">Actualizar</button><!--*******************imprimirABB*******************-->
-                            <input type="file" class="form-control" id="archivoClientes"
-                              aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="doc/json, .json" />
-                            <button class="btn btn-outline-primary" type="button" onclick="cargaMasivaCliente()">Cargar</button>
+                            <input type="file" class="form-control" id="archivoClientes" aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="doc/json, .json" />
+                            <button class="btn btn-primary" type="button" onclick="cargaMasivaCliente()">Cargar</button>
                           </div>
                         </form>
                       </div>
@@ -103,9 +101,8 @@
                         <form enctype="multipart/form-data">
                           <div class="input-group">
                             <button type="button" class="btn btn-outline-success" onclick="recuperar_Estructuras()">Actualizar</button><!--*******************imprimirABB*******************-->
-                            <input type="file" class="form-control" id="archivoProveedores"
-                              aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="doc/json, .json" />
-                            <button class="btn btn-outline-success" type="button" onclick="cargaMasivaProveedor()">Cargar</button>
+                            <input type="file" class="form-control" id="archivoProveedores" aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="doc/json, .json" />
+                            <button class="btn btn-success" type="button" onclick="cargaMasivaProveedor()">Cargar</button>
                           </div>
                         </form>
                       </div>
@@ -116,9 +113,48 @@
                         <h2>Eventos</h2><br>
                         <form>
                           <div class="input-group">
-                            <input type="file" class="form-control" id="archivoEventos"
-                              aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="doc/json, .json" />
-                            <button class="btn btn-outline-primary" type="button" id="btnEventos">Cargar</button>
+                            <button type="button" class="btn btn-outline-primary">Actualizar</button><!--*******************imprimirABB*******************-->
+                            <input type="file" class="form-control" id="archivoEventos" aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="doc/json, .json" />
+                            <button class="btn btn-primary" type="button" id="btnEventos">Cargar</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-8">
+                        <br>
+                        <h2>Productos</h2><br>
+                        <form>
+                          <div class="input-group">
+                            <button type="button" class="btn btn-outline-success">Actualizar</button><!--*******************imprimirABB*******************-->
+                            <input type="file" class="form-control" id="archivoProductos"  aria-label="Upload" accept="doc/json, .json"/>
+                            <button class="btn btn-success" type="button" onclick="cargaMasivaProductos()">Cargar</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-8 offset-md-1">
+                        <br>
+                        <h2>Ventas</h2><br>
+                        <form>
+                          <div class="input-group">
+                            <button type="button" class="btn btn-outline-primary">Actualizar</button><!--*******************imprimirABB*******************-->
+                            <input type="file" class="form-control" id="archivoVentas" aria-label="Upload" accept="doc/json, .json" />
+                            <button class="btn btn-primary" type="button" onclick="cargaMasivaVentas()">Cargar</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-8">
+                        <br>
+                        <h2>Rutas</h2><br>
+                        <form>
+                          <div class="input-group">
+                            <button type="button" class="btn btn-outline-success">Actualizar</button><!--*******************imprimirABB*******************-->
+                            <input type="file" class="form-control" id="archivoRutas"  aria-label="Upload" accept="doc/json, .json"/>
+                            <button class="btn btn-success" type="button" onclick="cargaMasivaRutas()">Cargar</button>
                           </div>
                         </form>
                       </div>
@@ -214,7 +250,10 @@
     </footer>
   </div>
 
-  <script type="text/javascript" src="../js/AVL_Vendedores.js"></script>
+  <script type="text/javascript" src="../js/B_producto.js"></script>
+  <script type="text/javascript" src="../js/TablaHash_venta.js"></script>
+  <script type="text/javascript" src="../js/Grafo_ruta.js"></script>
+  <script type="text/javascript" src="../js/AVL_Vendedor.js"></script>
   <script type="text/javascript" src="../js/general.js"></script>
   <script type="text/javascript" src="../js/ABB_Proveedor.js"></script>
   <script type="text/javascript" src="../js/Circular-json.js"></script>
