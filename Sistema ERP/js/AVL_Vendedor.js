@@ -29,7 +29,7 @@ class AVL_Vendedores {
         this.raiz = null;
     }
 
-    insertar(V) {
+    insertarVen(V) {
         let nuevo = new nodo_Vendedor(V);
         if (this.raiz == null) {
             this.raiz = nuevo;
@@ -63,7 +63,8 @@ class AVL_Vendedores {
                     }
                 }
             } else {
-                alert("El ID del Vendedor ya existe. \nPor favor ingrese otro ID.");
+                //alert("El ID del Vendedor ya existe. \nPor favor ingrese otro ID.");
+                console.log("El ID del Vendedor ya existe. \nPor favor ingrese otro ID.");
             }
             raiz_aux.altura = this.altura_mayor(this.altura(raiz_aux.derecha), this.altura(raiz_aux.izquierda)) + 1;
             return raiz_aux;
@@ -185,30 +186,30 @@ class AVL_Vendedores {
 
     generarDOT_AVL() {
         let cadena = "digraph arbol_ven {\n";
-        cadena += this.NodosDOT(this.raiz);
+        cadena += this.NodosDOT_V(this.raiz);
         cadena += "\n";
-        cadena += this.enramar(this.raiz);
+        cadena += this.enramar_V(this.raiz);
         cadena += "\n}";
         console.log(cadena);
-        this.generarImg(cadena);
-        document.getElementById('textAreaVen').value = cadena;
+        this.generarImg_V(cadena);
+        document.getElementById('textAreaVendedores').value = cadena;
     }
 
-    NodosDOT(raiz_aux) {
+    NodosDOT_V(raiz_aux) {
         let nodos = "";
         if (raiz_aux != null) {
             nodos += "n" + raiz_aux.vendedor.idV + "[label=\"" + raiz_aux.vendedor.idV + "\n" + raiz_aux.vendedor.nombre + "\n" + raiz_aux.vendedor.correo + "\n" + raiz_aux.vendedor.edad + "\"]\n";
-            nodos += this.NodosDOT(raiz_aux.izquierda);
-            nodos += this.NodosDOT(raiz_aux.derecha);
+            nodos += this.NodosDOT_V(raiz_aux.izquierda);
+            nodos += this.NodosDOT_V(raiz_aux.derecha);
         }
         return nodos;
     }
 
-    enramar(raiz_aux) {
+    enramar_V(raiz_aux) {
         let cadena = "";
         if (raiz_aux != null) {
-            cadena += this.enramar(raiz_aux.izquierda);
-            cadena += this.enramar(raiz_aux.derecha);
+            cadena += this.enramar_V(raiz_aux.izquierda);
+            cadena += this.enramar_V(raiz_aux.derecha);
             if (raiz_aux.izquierda != null) {
                 cadena += "n" + raiz_aux.vendedor.idV + "-> n" + raiz_aux.izquierda.vendedor.idV + "\n";
             }
@@ -221,13 +222,14 @@ class AVL_Vendedores {
         return cadena;
     }
 
-    generarImg(cadena) {
+    generarImg_V(cadena) {
         try {
             var g = graphlibDot.read(cadena);
             var render = new dagreD3.render();
             render(d3.select("arbol_ven.svg"), g);
         } catch {
-            alert("No se genero la imagen")
+            //alert("No se genero la imagen");
+            console.log("No se genero la imagen");
         }
     }
 }
@@ -265,7 +267,8 @@ class Lista_Doble {
             let aux = this.primero;
             while (aux.siguiente != null) {
                 if (aux.cliente.idC == cliente.idC) {
-                    alert("El ID del Cliente ya existe. \nPor favor ingrese otro ID.");
+                    //alert("El ID del Cliente ya existe. \nPor favor ingrese otro ID.");
+                    console.log("El ID del Cliente ya existe. \nPor favor ingrese otro ID.");
                     return;
                 }
                 aux = aux.siguiente;
@@ -286,7 +289,8 @@ class Lista_Doble {
             }
         }
         else {
-            alert("La lista de Clientes esta vacía!");
+            //alert("La lista de Clientes esta vacía!");
+            console.log("La lista de Clientes esta vacía!");
         }
     }
 
@@ -301,7 +305,7 @@ class Lista_Doble {
                         aux.siguiente = null;
                         aux = this.primero;
                         this.tam--;
-                        alert("Cliente eliminado!");
+                        //alert("Cliente eliminado!");
                         return;
                     } else {
                         ant = aux;
@@ -309,7 +313,7 @@ class Lista_Doble {
                         ant.siguiente = aux;
                         aux.anterior = ant;
                         this.tam--;
-                        alert("Cliente eliminado!");
+                        //alert("Cliente eliminado!");
                         return;
                     }
                 } else {
@@ -321,10 +325,11 @@ class Lista_Doble {
                 ant.siguiente = null;
                 aux = null;
                 this.tam--;
-                alert("Cliente eliminado!");
+                //alert("Cliente eliminado!");
             }
         } else {
-            alert("No hay clientes en lista!");
+            //alert("No hay clientes en lista!");
+            console.log("No hay clientes en lista!");
         }
     }
 
@@ -352,14 +357,14 @@ class Lista_Doble {
 let arbol_ven = new AVL_Vendedores();
 
 function registrarVendedor() {
-    recuperar_EstructuraAVL();
+    //recuperar_EstructuraAVL();
     var idVendedor = parseInt(document.getElementById("idVendedor").value);
     var nombre = document.getElementById("nombreVendedor").value;
     var correo = document.getElementById("correoVendedor").value;
     var edad = document.getElementById("edadVendedor").value;
     var password = document.getElementById("passwordVendedor").value;
     console.log(idVendedor, nombre, edad, correo, password);
-    arbol_ven.insertar(new Vendedor(idVendedor, nombre, edad, correo, password, new Lista_Doble()));
+    arbol_ven.insertarVen(new Vendedor(idVendedor, nombre, edad, correo, password, new Lista_Doble()));
     document.getElementById('idVendedor').value = "";
     document.getElementById('nombreVendedor').value = "";
     document.getElementById('correoVendedor').value = "";
@@ -368,7 +373,7 @@ function registrarVendedor() {
 }
 
 function registrarCliente() {
-    recuperar_EstructuraAVL();
+    //recuperar_EstructuraAVL();
     var idCliente = parseInt(document.getElementById("idCliente").value);
     var nombre = document.getElementById("nombreCliente").value;
     var correo = document.getElementById("correoCliente").value;
@@ -386,19 +391,21 @@ function registrarCliente() {
 function cargaMasivaVendedor() {
     var data = document.getElementById('archivoUsuarios').files;
     if (!data.length) {
-        alert('No se ha seleccionado el archivo Vendedores');
+        //alert('No se ha seleccionado el archivo Vendedores');
+        console.log('No se ha seleccionado el archivo Vendedores');
     } else {
-        var cadena = readFileavl(data[0]);
-        console.log(cadena);
+        readFileavl(data[0]);
+        //console.log(cadena);
     }
 }
 
 function cargaMasivaCliente(){
     var data = document.getElementById('archivoClientes').files;
     if (!data.length) {
-        alert('No se ha seleccionado el archivo Clientes');
+        //alert('No se ha seleccionado el archivo Clientes');
+        console.log('No se ha seleccionado el archivo Clientes');
     } else {
-        readFileavl(data[0]);
+        readFileCli(data[0]);
     }
 }
 
@@ -417,7 +424,7 @@ function readFileavl(file) {
             var edad = value.edad;
             var correo = value.correo;
             var password = value.password;
-            arbol_ven.insertar(new Vendedor(idVendedor, nombre, edad, correo, password, new Lista_Doble()));
+            arbol_ven.insertarVen(new Vendedor(idVendedor, nombre, edad, correo, password, new Lista_Doble()));
             console.log(idVendedor, nombre, edad, correo, password);
         }
     }
@@ -450,12 +457,12 @@ function readFileCli(file){
     reader.readAsText(file);
 }
 
-function mostrarGrafico2() {
-    recuperar_EstructuraAVL();
+function mostrarGraficoAVL_Ven() {
+    //recuperar_EstructuraAVL();
     arbol_ven.generarDOT_AVL();
 }
 
-function mostrarGrafico3(){
+function mostrarGraficoLCLI(){
     recuperar_EstructuraAVL();
     var idCliente = parseInt(document.getElementById("idvendedorCli").value);
     listac = arbol_ven.obtenerListaC(arbol_ven,idCliente);
@@ -507,23 +514,21 @@ function deshabProv() {
 
 
 
-/*arbol = new AVL_Vendedores();
+/*let arbol = new AVL_Vendedores();
 
-arbol.insertar(new Vendedor(30, "jose", 25, "correo", "4561", new Lista_Doble()));
-arbol.insertar(new Vendedor(40, "jose", 25, "correo", "4561", null));
-arbol.insertar(new Vendedor(20, "jose", 25, "correo", "4561", null));
-arbol.insertar(new Vendedor(10, "jose", 25, "correo", "4561", null));
-arbol.insertar(new Vendedor(5, "jose", 25, "correo", "4561", null));
-arbol.insertar(new Vendedor(70, "jose", 25, "correo", "4561", null));
-arbol.insertar(new Vendedor(7, "jose", 25, "correo", "4561", null));
-arbol.insertar(new Vendedor(100, "jose", 25, "correo", "4561", null));
-
-
-arbol.inOrden(arbol.raiz)
-
-arbol.insertarClienteAVL(arbol.raiz, 30, new Cliente(1, "ramon", "correo"));
-arbol.insertarClienteAVL(arbol.raiz, 30, new Cliente(20, "ramon", "correo"));*/
-
-//arbol.generarDot();
+arbol.insertarVen(new Vendedor(30, "jose", 25, "correo", "4561", new Lista_Doble()));
+arbol.insertarVen(new Vendedor(40, "jose", 25, "correo", "4561", null));
+arbol.insertarVen(new Vendedor(20, "jose", 25, "correo", "4561", null));
+arbol.insertarVen(new Vendedor(10, "jose", 25, "correo", "4561", null));
+arbol.insertarVen(new Vendedor(5, "jose", 25, "correo", "4561", null));
+arbol.insertarVen(new Vendedor(70, "jose", 25, "correo", "4561", null));
+arbol.insertarVen(new Vendedor(7, "jose", 25, "correo", "4561", null));
+arbol.insertarVen(new Vendedor(100, "jose", 25, "correo", "4561", null));
 
 
+//arbol.inOrden(arbol.raiz)
+
+//arbol.insertarVenClienteAVL(arbol.raiz, 30, new Cliente(1, "ramon", "correo"));
+//arbol.insertarVenClienteAVL(arbol.raiz, 30, new Cliente(20, "ramon", "correo"));
+
+arbol.generarDOT_AVL();*/

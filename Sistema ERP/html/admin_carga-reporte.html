@@ -61,6 +61,10 @@
                 <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile4" type="button"
                   role="tab" aria-controls="profile" aria-selected="false">Reporte Eventos</button>
               </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile5" type="button"
+                  role="tab" aria-controls="profile" aria-selected="false">Reporte Productos</button>
+              </li>
             </ul>
             <br>
             <div class="row">
@@ -175,13 +179,13 @@
                   <!--REPORTE VENDEDOR-->
                   <div class="tab-pane fade" id="profile2" role="tabpanel" aria-labelledby="profile-tab">
                     <h3>Reporte AVL Vendedores</h3>
-                    <button type="button" class="btn btn-outline-success" onclick="mostrarGrafico2()">Mirar</button>
+                    <button type="button" class="btn btn-outline-success" onclick="mostrarGraficoAVL_Ven()">Mirar</button>
                     <a href="https://dreampuf.github.io/GraphvizOnline" target="_blank"><button type="button" class="btn btn-primary" onclick="imprimiraAVL()">Ir a Graphviz online</button></a>
                     <br><br>
                     <img src="../img/luna.png" class="img-fluid" alt="...">
                     <br><br>
                     <div class="form-floating">
-                      <textarea class="form-control" placeholder="DOT" id="textAreaVen" style="height: 300px"></textarea>
+                      <textarea class="form-control" placeholder="DOT" id="textAreaVendedores" style="height: 300px"></textarea>
                     </div>
                   </div>
                   <!--REPORTE CLIENTES-->
@@ -191,7 +195,7 @@
                       <div class="col-md-6">
                         <div class="input-group mb-3">
                           <input type="text" class="form-control" placeholder="ID Vendedor" aria-label="Recipient's username" id="idvendedorCli" aria-describedby="button-addon2">
-                          <button class="btn btn-outline-primary" type="button" onclick="mostrarGrafico3()">Mirar</button>
+                          <button class="btn btn-outline-primary" type="button" onclick="mostrarGraficoLCLI()">Mirar</button>
                           <a href="https://dreampuf.github.io/GraphvizOnline" target="_blank"><button type="button" class="btn btn-primary" onclick="imprimiraAVL()">Ir a Graphviz online</button></a>
                         </div>
                       </div>
@@ -216,6 +220,18 @@
                       </div>
                     </div>
                     <img src="../img/luna.png" class="img-fluid" alt="...">
+                  </div>
+                  <!--REPORTE PRODUCTOS-->
+                  <div class="tab-pane fade" id="profile5" role="tabpanel" aria-labelledby="profile-tab">
+                    <h3>Reporte Arbol_B Productos</h3>
+                    <button type="button" class="btn btn-outline-primary" onclick="mostrarGraficoB()">Mirar</button>
+                    <a href="https://dreampuf.github.io/GraphvizOnline" target="_blank"><button type="button" class="btn btn-primary">Ir a Graphviz online</button></a>
+                    <br><br>
+                    <img src="../img/luna.png" class="img-fluid" alt="...">
+                    <br><br>
+                    <div class="form-floating">
+                      <textarea class="form-control" placeholder="DOT" id="textAreaProdu" style="height: 300px"></textarea>
+                    </div>
                   </div>
                 </div>
               </div>
