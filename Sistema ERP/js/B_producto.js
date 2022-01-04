@@ -334,6 +334,7 @@ class ArbolB {
 }
 //*************************************************************************************************************************************** */
 //*************************************************************************************************************************************** */
+//*************************************************************************************************************************************** */
 let aB_productos = new ArbolB();
 
 function cargaMasivaProductos() {
@@ -371,7 +372,11 @@ function readFileProductos(file) {
 
 function mostrarGraficoB() {
     //recuperar_Estructuras();
-    aB_productos.generarDotB();
+    try{
+        aB_productos.generarDotB();
+    }catch{
+        alert("EL Arbol_B de Productos esta vacio!!");
+    }
 }
 
 /*let arbol = new ArbolB();
