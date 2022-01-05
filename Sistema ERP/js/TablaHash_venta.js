@@ -116,10 +116,29 @@ class TablaHash {
         let cadena = "";
         for (var i = 0; i < this.tam; i++) {
             if (this.claves[i] != null) {
-                cadena += "c" + i + "-->" + this.claves[i].venta.idVenta + "\n";
+                cadena += "c" + i + "------------>idVenta:" + this.claves[i].venta.idVenta + "\n          Vendedor: " + this.claves[i].venta.nombreVendedor + "\n          cliente: " + this.claves[i].venta.nombreCliente + "\n          TotalVenta: " + this.claves[i].venta.TotalVenta + "\n";
             } else {
                 cadena += "c" + i + "------------" + "\n";
             }
+        }
+        return cadena;
+    }
+
+    retornarVentasVendedor(nombreBuscar) {
+        let cadena = "";
+        for (var i = 0; i < this.tam; i++) {
+            if (this.claves[i] != null) {
+                if (this.claves[i].venta.nombreVendedor == nombreBuscar) {
+                    cadena += "ClaveHash: " + i + "\n";
+                    cadena += "id Venta: " + this.claves[i].venta.idVenta + "\n";
+                    cadena += "Nombre Vendedor: " + this.claves[i].venta.nombreVendedor + "\n";
+                    cadena += "Nombre Cliente: " + this.claves[i].venta.nombreCliente + "\n";
+                    cadena += "Total Venta: " + this.claves[i].venta.TotalVenta + "\n";
+                }
+            }
+        }
+        if (cadena == "") {
+            cadena = "No se encontro el Vendedor o no tiene Ventas."
         }
         return cadena;
     }
@@ -158,20 +177,20 @@ function readFileVentas(file) {
             var totVenta = 0;
             var listaProd = value.productos;
             console.log(idVen, nombreVen, nombreClie);
-            let listaprodinsertar =[];
+            let listaprodinsertar = [];
             for (let value2 of listaProd) {
                 var idProd = parseInt(value2.id);
                 var nombreProd = value2.nombre;
                 var precioProd = value2.precio;
                 var cant = value2.cantidad;
-                let subVenta = cant*precioProd;
+                let subVenta = cant * precioProd;
                 // SE DEBE BUSCAR EL PRODUCTO POR ID Y LUEGO OBTENER EL PRECIO Y MULTIPLICARLO POR LA CANTIDAD
                 //QUE ESTA ARRIBA E INCREMENTARLO A LA VARIABLE TOTVENTA
-                listaprodinsertar.push(new Prod(idProd,nombreProd,precioProd,cant));
+                listaprodinsertar.push(new Prod(idProd, nombreProd, precioProd, cant));
                 console.log("     ", idProd, nombreProd, precioProd, cant);
                 totVenta += subVenta;
             }
-            th_ventas.insertarVenta(new Venta(idVen,nombreVen,nombreClie,totVenta,listaprodinsertar));
+            th_ventas.insertarVenta(new Venta(idVen, nombreVen, nombreClie, totVenta, listaprodinsertar));
             //guardar_Estructuras();
             //idAux++;
         }
@@ -190,8 +209,14 @@ function mostrarGraficoTH() {
         alert("La Tabla Hash de Ventas esta vacia!!");
     }*/
     cadena = th_ventas.cadenaTablaH();
-        console.log(cadena);
-        document.getElementById('textAreaVentas').value = cadena;
+    console.log(cadena);
+    document.getElementById('textAreaVentas').value = cadena;
+}
+
+function reporteXvendedor() {
+    var nombreBuscar = document.getElementById("idVenVentas").value;
+    let cadena = th_ventas.retornarVentasVendedor(nombreBuscar);
+    document.getElementById('textAreaVentasVendedor').value = cadena;
 }
 
 

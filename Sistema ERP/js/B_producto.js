@@ -253,14 +253,12 @@ class ArbolB {
     }
 
     generarDotB() {
-        let cadena = "digraph arbolB_Produc{\n";
-        cadena += "rankr=TB;\n";
-        cadena += "node[shape = box,fillcolor=\"azure2\" color=\"black\" style=\"filled\"];\n";
-        cadena += "\n";
-        cadena += this.NodosDotB(this.raiz);
-        cadena += "\n";
-        cadena += this.enramarB(this.raiz);
-        cadena += "}\n"
+        let cadena="digraph arbolB{\n";
+        cadena+="rankr=TB;\n";
+        cadena+="node[shape = box,fillcolor=\"azure2\" color=\"black\" style=\"filled\"];\n";
+        cadena+= this.NodosDotB(this.raiz);
+        cadena+=  this.enramarB(this.raiz);
+        cadena+="}\n"
         console.log(cadena);
         this.generarImgB(cadena);
         document.getElementById('textAreaProdu').value = cadena;
@@ -274,10 +272,10 @@ class ArbolB {
             let aux = raizP_aux.listaclaves.primero;
             while (aux != null) {
                 cont++;
-                cadena += "|{" + aux.producto.idProd + "\n" +aux.producto.nombre + "}|<p" + cont + "> ";
+                cadena += "|{" + aux.producto.idProd +aux.producto.nombre + "}|<p" + cont + "> ";
                 aux = aux.siguiente;
             }
-            cadena += "\"]" + raizP_aux.listaclaves.primero.producto.idProd + "\n" +raizP_aux.listaclaves.primero.producto.nombre + ";\n";
+            cadena += "\"]" + raizP_aux.listaclaves.primero.producto.idProd +raizP_aux.listaclaves.primero.producto.nombre + ";\n";
             return cadena;
         } else {
             cadena += "node[shape=record label= \"<p0>"
@@ -285,10 +283,10 @@ class ArbolB {
             let aux = raizP_aux.listaclaves.primero;
             while (aux != null) {
                 cont++;
-                cadena += "|{" + aux.producto.idProd + "\n" +aux.producto.nombre + "}|<p" + cont + "> ";
+                cadena += "|{" + aux.producto.idProd +aux.producto.nombre + "}|<p" + cont + "> ";
                 aux = aux.siguiente;
             }
-            cadena += "\"]" + raizP_aux.listaclaves.primero.producto.idProd + "\n" +raizP_aux.listaclaves.primero.producto.nombre + ";\n";
+            cadena += "\"]" + raizP_aux.listaclaves.primero.producto.idProd +raizP_aux.listaclaves.primero.producto.nombre + ";\n";
             //
             aux = raizP_aux.listaclaves.primero;
             while (aux != null) {

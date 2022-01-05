@@ -270,10 +270,20 @@
                     <h3>Reporte TablaHash Ventas</h3>
                     <button type="button" class="btn btn-outline-primary" onclick="mostrarGraficoTH()">Mirar</button>
                     <br><br>
-                    <img src="../img/luna.png" class="img-fluid" alt="...">
-                    <br><br>
                     <div class="form-floating">
                       <textarea class="form-control" placeholder="DOT" id="textAreaVentas" style="height: 300px"></textarea>
+                    </div>
+                    <br>
+                    <img src="../img/luna.png" class="img-fluid" alt="...">
+                    <br><br>
+                    <div class="col-md-6">
+                      <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Ingrese Nombre del Vendedor" aria-label="Recipient's username" id="idVenVentas" aria-describedby="button-addon2">
+                        <button class="btn btn-primary" type="button" onclick="reporteXvendedor()">Mirar</button>
+                      </div>
+                    </div>
+                    <div class="form-floating">
+                      <textarea class="form-control" placeholder="DOT" id="textAreaVentasVendedor" style="height: 200px"></textarea>
                     </div>
                   </div>
                 </div>
@@ -284,6 +294,11 @@
       </div>
     </div>
   </div>
+
+  <div class="container" id="PanelTablaHash">
+
+  </div>
+
 
   <div class="container">
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
