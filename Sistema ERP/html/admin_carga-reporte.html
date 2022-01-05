@@ -42,6 +42,10 @@
             <!--TITULO GENERAL-->
             <ul class="nav nav-tabs" id="myTab" role="tablist" style="background-color: rgb(1, 1, 87);">
               <li class="nav-item" role="presentation">
+                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+                  role="tab" aria-controls="profile" aria-selected="false">-------------</button>
+              </li>
+              <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
                   role="tab" aria-controls="home" aria-selected="true">Carga de Archivos</button>
               </li>
@@ -59,6 +63,10 @@
               </li>
               <li class="nav-item" role="presentation">
                 <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile4" type="button"
+                  role="tab" aria-controls="profile" aria-selected="false">-------------</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile4" type="button"
                   role="tab" aria-controls="profile" aria-selected="false">Reporte Eventos</button>
               </li>
               <li class="nav-item" role="presentation">
@@ -68,6 +76,14 @@
               <li class="nav-item" role="presentation">
                 <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile6" type="button"
                   role="tab" aria-controls="profile" aria-selected="false">Reporte Rutas</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile7" type="button"
+                  role="tab" aria-controls="profile" aria-selected="false">Reporte Ventas</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile7" type="button"
+                  role="tab" aria-controls="profile" aria-selected="false">-------------</button>
               </li>
             </ul>
             <br>
@@ -247,6 +263,17 @@
                     <br><br>
                     <div class="form-floating">
                       <textarea class="form-control" placeholder="DOT" id="textAreaRutas" style="height: 300px"></textarea>
+                    </div>
+                  </div>
+                  <!--REPORTE VENTAS-->
+                  <div class="tab-pane fade" id="profile7" role="tabpanel" aria-labelledby="profile-tab">
+                    <h3>Reporte TablaHash Ventas</h3>
+                    <button type="button" class="btn btn-outline-primary" onclick="mostrarGraficoTH()">Mirar</button>
+                    <br><br>
+                    <img src="../img/luna.png" class="img-fluid" alt="...">
+                    <br><br>
+                    <div class="form-floating">
+                      <textarea class="form-control" placeholder="DOT" id="textAreaVentas" style="height: 300px"></textarea>
                     </div>
                   </div>
                 </div>

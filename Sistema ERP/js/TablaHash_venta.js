@@ -1,6 +1,15 @@
 //*************************************************************************************************************************************** */
 //************************************************************Thash VENTAS*************************************************************** */
 //*************************************************************************************************************************************** */
+class Prod {
+    constructor(idProd, nombre, precio, cantidad) {
+        this.idProd = idProd;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.cantidad = cantidad;
+    }
+}
+
 class Venta {
     constructor(idVenta, nombreVendedor, nombreCliente, TotalVenta, listaProductos) {
         this.idVenta = idVenta;
@@ -103,14 +112,16 @@ class TablaHash {
         }
     }
 
-    imprimirTalaH() {
+    cadenaTablaH() {
+        let cadena = "";
         for (var i = 0; i < this.tam; i++) {
             if (this.claves[i] != null) {
-                console.log("c" + i + "-->" + this.claves[i].venta.idVenta);
+                cadena += "c" + i + "-->" + this.claves[i].venta.idVenta + "\n";
             } else {
-                console.log("c" + i + "------------");
+                cadena += "c" + i + "------------" + "\n";
             }
         }
+        return cadena;
     }
 }
 
@@ -119,7 +130,7 @@ class TablaHash {
 //*************************************************************************************************************************************** */
 //*************************************************************************************************************************************** */
 //*************************************************************************************************************************************** */
-//let aB_productos = new ArbolB();
+let th_ventas = new TablaHash();
 
 function cargaMasivaVentas() {
     var data = document.getElementById('archivoVentas').files;
@@ -147,37 +158,44 @@ function readFileVentas(file) {
             var totVenta = 0;
             var listaProd = value.productos;
             console.log(idVen, nombreVen, nombreClie);
+            let listaprodinsertar =[];
             for (let value2 of listaProd) {
                 var idProd = parseInt(value2.id);
                 var nombreProd = value2.nombre;
                 var precioProd = value2.precio;
                 var cant = value2.cantidad;
+                let subVenta = cant*precioProd;
                 // SE DEBE BUSCAR EL PRODUCTO POR ID Y LUEGO OBTENER EL PRECIO Y MULTIPLICARLO POR LA CANTIDAD
                 //QUE ESTA ARRIBA E INCREMENTARLO A LA VARIABLE TOTVENTA
-                //let ven = new Venta(idVen,nombreVen,nombreClie,TotalVenta,listaProductosHayque..Crear);
+                listaprodinsertar.push(new Prod(idProd,nombreProd,precioProd,cant));
                 console.log("     ", idProd, nombreProd, precioProd, cant);
+                totVenta += subVenta;
             }
-            //let producto = new Producto(idProducto,nombre,precio,cantidad);
-            //console.log(idVen,nombreVen,nombreClie);
-            //abb_Prov.insertar(proveedor);
+            th_ventas.insertarVenta(new Venta(idVen,nombreVen,nombreClie,totVenta,listaprodinsertar));
             //guardar_Estructuras();
             //idAux++;
         }
     }
     reader.readAsText(file);
+    alert("Archivo cargado con exito!")
 }
 
-/*function mostrarGraficoB() {
+function mostrarGraficoTH() {
     //recuperar_Estructuras();
-    try{
-        aB_productos.generarDotB();
-    }catch{
-        alert("EL Arbol_B de Productos esta vacio!!");
-    }
-}*/
+    /*try {
+        cadena = th_ventas.cadenaTablaH();
+        console.log(cadena);
+        document.getElementById('textAreaVentas').value = cadena;
+    } catch {
+        alert("La Tabla Hash de Ventas esta vacia!!");
+    }*/
+    cadena = th_ventas.cadenaTablaH();
+        console.log(cadena);
+        document.getElementById('textAreaVentas').value = cadena;
+}
 
 
-let tabla = new TablaHash();
+/*let tabla = new TablaHash();
 
 tabla.insertarVenta(new Venta(10,"nomVende","nomCli",100,null));
 tabla.insertarVenta(new Venta(8,"nomVende","nomCli",100,null));
@@ -189,4 +207,4 @@ tabla.insertarVenta(new Venta(90,"nomVende","nomCli",100,null));
 tabla.insertarVenta(new Venta(181,"nomVende","nomCli",100,null));
 tabla.insertarVenta(new Venta(112,"nomVende","nomCli",100,null));
 tabla.insertarVenta(new Venta(190,"nomVende","nomCli",100,null));
-tabla.imprimirTalaH();
+tabla.imprimirTalaH();*/
