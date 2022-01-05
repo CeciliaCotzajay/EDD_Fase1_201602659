@@ -83,14 +83,15 @@ class Grafo {
         return null;
     }
 
-    insertarAdyacenteGrafo(id_vertice, id_adyacente, distancia) {
+    insertarAdyacenteGrafo(id_vertice, id_adyacente, distancia,nombreAdy) {
         let verticeEncontrado = this.buscarVertice(id_vertice);
         let adyacenteEncontrado = this.buscarVertice(id_adyacente);
         if (verticeEncontrado != null) {
             if (adyacenteEncontrado != null) {
                 verticeEncontrado.listaAdyacentes.insertarAdyacente(adyacenteEncontrado.vertice, distancia);
             } else {
-                console.log("no existe el nodo adyacente")
+                let adyacenteNuevo = new Vertice(parseInt(id_adyacente),nombreAdy);
+                verticeEncontrado.listaAdyacentes.insertarAdyacente(adyacenteNuevo, distancia);
             }
         } else {
             console.log("no existe el nodo origen")
@@ -116,12 +117,31 @@ class Grafo {
         }
         cadena += "}"
         console.log(cadena);
+        this.generarImgGrafo(cadena);
+        document.getElementById('textAreaRutas').value = cadena;
+    }
+
+    generarImgGrafo(cadena){
+        try {
+            var g = graphlibDot.read(cadena);
+            var render = new dagreD3.render();
+            render(d3.select("Grafo_Rut.svg"), g);
+            /*try{
+                let dotPath = "C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe";
+                let cmd = dotPath + " -Tjpg " + cadena + " -o " + "reporte1.png";
+                Runtime.getRuntime().exec(cmd);*/
+        } catch {
+            alert("No se genero la imagen")
+        }
+    
     }
 }
 
 //*************************************************************************************************************************************** */
 //*************************************************************************************************************************************** */
 //*************************************************************************************************************************************** */
+let grafo_rutas = new Grafo();
+
 function cargaMasivaRutas() {
     var data = document.getElementById('archivoRutas').files;
     if (!data.length) {
@@ -145,30 +165,29 @@ function readFileRutas(file) {
             var nombreRut = value.nombre;
             var listaAdy = value.adyacentes;
             console.log(idRut, nombreRut);
+            grafo_rutas.insertarVertice(new Vertice(idRut, nombreRut));
             for (let value2 of listaAdy) {
                 var idAdy = parseInt(value2.id);
                 var nombreAdy = value2.nombre;
                 var distancia = value2.distancia;
-                //let producto = new Producto(idProducto,nombre,precio,cantidad);
+                grafo_rutas.insertarAdyacenteGrafo(idRut,idAdy,distancia,nombreAdy);
                 console.log("     ", idAdy, nombreAdy, distancia);
-                //abb_Prov.insertar(proveedor);
             }
-            //let producto = new Producto(idProducto,nombre,precio,cantidad);
-            //abb_Prov.insertar(proveedor);
             //guardar_Estructuras();
         }
     }
     reader.readAsText(file);
+    alert("Archivo cargado con exito!")
 }
 
-/*function mostrarGraficoB() {
+function mostrarGraficoGrafo() {
     //recuperar_Estructuras();
     try{
-        aB_productos.generarDotB();
+        grafo_rutas.generarDotGrafo();
     }catch{
-        alert("EL Arbol_B de Productos esta vacio!!");
+        alert("EL Grafo de Rutas esta vacio!!");
     }
-}*/
+}
 
 /*let grafo_prueba = new Grafo();
 grafo_prueba.insertarVertice(new Vertice(4, "ramon", "ruta"));

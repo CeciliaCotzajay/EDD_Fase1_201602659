@@ -54,7 +54,7 @@ class ListaNodoProducto {
                     //idProd = PRIMERO
                 } else {
                     console.log("El ID del Producto ya existe, porfavor ingrese otro!.");
-                    //alert("El ID del Producto ya existe, porfavor ingrese otro!.");
+                    alert("El ID del Producto ya existe, porfavor ingrese otro!.");
                     return false;
                 }
             } else { //hay mas de un dato
@@ -90,7 +90,7 @@ class ListaNodoProducto {
                             return true;
                         } else if (nuevo.producto.idProd == aux.producto.idProd) {
                             console.log("El ID del Producto ya existe, porfavor ingrese otro!.");
-                            //alert("El ID del Producto ya existe, porfavor ingrese otro!.");
+                            alert("El ID del Producto ya existe, porfavor ingrese otro!.");
                             return false;
                         } else {
                             aux = aux.siguiente;
@@ -340,7 +340,7 @@ let aB_productos = new ArbolB();
 function cargaMasivaProductos() {
     var data = document.getElementById('archivoProductos').files;
     if (!data.length) {
-        //alert('No se ha seleccionado el archivo Productos');
+        alert('No se ha seleccionado el archivo Productos');
     } else {
         readFileProductos(data[0]);
     }

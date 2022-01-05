@@ -65,6 +65,10 @@
                 <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile5" type="button"
                   role="tab" aria-controls="profile" aria-selected="false">Reporte Productos</button>
               </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile6" type="button"
+                  role="tab" aria-controls="profile" aria-selected="false">Reporte Rutas</button>
+              </li>
             </ul>
             <br>
             <div class="row">
@@ -231,6 +235,18 @@
                     <br><br>
                     <div class="form-floating">
                       <textarea class="form-control" placeholder="DOT" id="textAreaProdu" style="height: 300px"></textarea>
+                    </div>
+                  </div>
+                  <!--REPORTE RUTAS-->
+                  <div class="tab-pane fade" id="profile6" role="tabpanel" aria-labelledby="profile-tab">
+                    <h3>Reporte Grafo Rutas</h3>
+                    <button type="button" class="btn btn-outline-primary" onclick="mostrarGraficoGrafo()">Mirar</button>
+                    <a href="https://dreampuf.github.io/GraphvizOnline" target="_blank"><button type="button" class="btn btn-primary">Ir a Graphviz online</button></a>
+                    <br><br>
+                    <img src="../img/luna.png" class="img-fluid" alt="...">
+                    <br><br>
+                    <div class="form-floating">
+                      <textarea class="form-control" placeholder="DOT" id="textAreaRutas" style="height: 300px"></textarea>
                     </div>
                   </div>
                 </div>
