@@ -91,6 +91,7 @@ class Grafo {
                 verticeEncontrado.listaAdyacentes.insertarAdyacente(adyacenteEncontrado.vertice, distancia);
             } else {
                 let adyacenteNuevo = new Vertice(parseInt(id_adyacente),nombreAdy);
+                this.insertarVertice(adyacenteNuevo); // TAMBIEN AÑADE LOS ADYACENTES COMO VERTICES***************
                 verticeEncontrado.listaAdyacentes.insertarAdyacente(adyacenteNuevo, distancia);
             }
         } else {
